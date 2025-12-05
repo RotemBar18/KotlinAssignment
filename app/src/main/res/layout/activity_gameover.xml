@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameOverActivity"
+    >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/gameover_IMG_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/score"
+        android:layout_centerInParent="true"
+       />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/score_LBL_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Game Over!\nEnergy Level:"
+        android:layout_centerInParent="true"
+        android:textSize="35sp"
+        android:textStyle="italic"
+        android:gravity="start"
+        android:paddingLeft="100dp"
+        android:textColor="@color/green"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/score_BTN_newGame"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:background="@drawable/new_game_btn"
+
+        />
+
+</RelativeLayout>
