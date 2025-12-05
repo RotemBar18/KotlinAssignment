@@ -26,21 +26,21 @@
             android:id="@+id/main_IMG_heart0"
             android:layout_width="@dimen/heart_size"
             android:layout_height="@dimen/heart_size"
-            app:srcCompat="@drawable/heart"
+            app:srcCompat="@drawable/heart_01"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_heart1"
             android:layout_width="@dimen/heart_size"
             android:layout_height="@dimen/heart_size"
-            app:srcCompat="@drawable/heart"
+            app:srcCompat="@drawable/heart_02"
             android:layout_marginHorizontal="@dimen/small_margin"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_heart2"
             android:layout_width="@dimen/heart_size"
             android:layout_height="@dimen/heart_size"
-            app:srcCompat="@drawable/heart"
+            app:srcCompat="@drawable/heart_03"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
