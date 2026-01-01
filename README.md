@@ -131,25 +131,9 @@ At game end:
 - Clone the Repository
 - Open the project folder in Android Studio.
 - Connect a physical Android device (recommended) or start an emulator
+- Run the app.
 
-## for Google Maps API Key Setup
-The leaderboard map requires a Google Maps API key.
-Create an API Key and Add the API Key to the Project
-
-Open:
-```
-app/src/main/AndroidManifest.xml
-```
-
-Inside the `<application>` tag, add:
-
-```xml
-<meta-data
-    android:name="com.google.android.geo.API_KEY"
-    android:value="YOUR_API_KEY_HERE" />
-```
-
-Replace `YOUR_API_KEY_HERE` with your actual API key.
+---
 
 
 ## 👨‍💻 Author
