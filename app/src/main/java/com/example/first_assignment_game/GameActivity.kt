@@ -411,7 +411,7 @@ class GameActivity : AppCompatActivity() {
 
      private fun changeToGameOverActivity(message: String, score: Int) {
         val intent = Intent(this, GameOverActivity::class.java)
-        var bundle = Bundle()
+        val bundle = Bundle()
         bundle.putString(Constants.BundleKeys.MESSAGE_KEY, message)
         bundle.putInt(Constants.BundleKeys.SCORE_KEY, score)
         intent.putExtras(bundle)
