@@ -125,14 +125,32 @@ At game end:
   - High score events
 
 
-## 🚀 How to Run
 
-1. Open the project in **Android Studio**
-2. Add your **Google Maps API key**
-3. Run on a physical device (recommended)
-4. Grant location permission (optional)
+## 🚀 How to Clone and Run the Game
 
----
+- Clone the Repository
+- Open the project folder in Android Studio.
+- Connect a physical Android device (recommended) or start an emulator
+
+## for Google Maps API Key Setup
+The leaderboard map requires a Google Maps API key.
+Create an API Key and Add the API Key to the Project
+
+Open:
+```
+app/src/main/AndroidManifest.xml
+```
+
+Inside the `<application>` tag, add:
+
+```xml
+<meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="YOUR_API_KEY_HERE" />
+```
+
+Replace `YOUR_API_KEY_HERE` with your actual API key.
+
 
 ## 👨‍💻 Author
 Rotem Bar
