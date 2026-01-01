@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".GameOverActivity"
     >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/vegeta_close3">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gameover_IMG_bg"
@@ -14,30 +18,89 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/score"
         android:layout_centerInParent="true"
-       />
+        />
+
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/score_LBL_title"
+        android:id="@+id/gameover_LBL_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Game Over!\nEnergy Level:"
         android:layout_centerInParent="true"
-        android:textSize="35sp"
+        android:textSize="@dimen/header_textsize"
         android:textStyle="italic"
         android:gravity="start"
         android:paddingLeft="100dp"
-        android:textColor="@color/green"
+        android:textColor="@color/red"
         />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/score_BTN_newGame"
+        android:id="@+id/gameover_BTN_newGame"
         android:layout_width="200dp"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/default_margin"
         android:background="@drawable/new_game_btn"
-
         />
+
+
+    </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/gameover_LAYOUT_highscore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/high_score_bg"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/highscore_LBL_highscore"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/highscore_title"
+
+                    />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/gameover_EDITTEXT_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:textStyle="bold"
+                    android:hint="Enter your name:"
+                    android:textColorHint="@color/black"
+                    android:textSize="26sp"
+                    android:maxLength="10"
+                    android:textColor="@color/black"
+                    android:inputType="textPersonName"
+                    android:textCursorDrawable="@color/black"
+                    android:paddingRight="80dp"
+                    android:paddingVertical="8dp"
+                    android:paddingLeft="8dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="50dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/highscore_BTN_send"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/send_btn"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_gravity="center"
+
+                    />
+
+        </LinearLayout>
+
+
 
 </RelativeLayout>

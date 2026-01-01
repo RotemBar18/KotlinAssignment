@@ -2,55 +2,82 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_LAYOUT_screen"
+    android:id="@+id/game_LAYOUT_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".GameActivity"
     >
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/game_LAYOUT_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
 
 
+    >
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/main_LAYOUT_hearts"
+        android:id="@+id/game_LAYOUT_hearts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/default_margin"
+        android:paddingTop="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding"
         >
 
-
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG_heart0"
+            android:id="@+id/game_IMG_heart0"
             android:layout_width="@dimen/heart_size"
             android:layout_height="@dimen/heart_size"
-            app:srcCompat="@drawable/heart_01"
+            app:srcCompat="@drawable/heart"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG_heart1"
+            android:id="@+id/game_IMG_heart1"
             android:layout_width="@dimen/heart_size"
             android:layout_height="@dimen/heart_size"
-            app:srcCompat="@drawable/heart_02"
+            app:srcCompat="@drawable/heart"
             android:layout_marginHorizontal="@dimen/small_margin"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG_heart2"
+            android:id="@+id/game_IMG_heart2"
             android:layout_width="@dimen/heart_size"
             android:layout_height="@dimen/heart_size"
-            app:srcCompat="@drawable/heart_03"
+            app:srcCompat="@drawable/heart"
+
             />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/game_LBL_odometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
+        android:minWidth="100dp"
+        android:text="0"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/game_LAYOUT_header"
+        android:background="@drawable/btn_gradient"
+        app:layout_constraintBottom_toBottomOf="@id/game_LAYOUT_header"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
     <GridLayout
-        android:id="@+id/main_GRID_board"
+        android:id="@+id/game_GRID_board"
         android:layout_width="match_parent"
-        android:layout_below="@id/main_LAYOUT_hearts"
-        android:layout_above="@id/main_LAYOUT_buttons"
-        android:columnCount="3"
+        android:layout_below="@id/game_LAYOUT_header"
+        android:layout_above="@id/game_LAYOUT_buttons"
+        android:columnCount="5"
         android:rowCount="5"
         android:layout_height="match_parent"
         >
@@ -72,6 +99,20 @@
 
         <FrameLayout
             android:id="@+id/cell_0_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
+        <FrameLayout
+            android:id="@+id/cell_0_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
+        <FrameLayout
+            android:id="@+id/cell_0_4"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -99,6 +140,20 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1" />
 
+        <FrameLayout
+            android:id="@+id/cell_1_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
+        <FrameLayout
+            android:id="@+id/cell_1_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
         <!-- שורה שלישית -->
         <FrameLayout
             android:id="@+id/cell_2_0"
@@ -116,6 +171,20 @@
 
         <FrameLayout
             android:id="@+id/cell_2_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
+        <FrameLayout
+            android:id="@+id/cell_2_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
+        <FrameLayout
+            android:id="@+id/cell_2_4"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -143,6 +212,20 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1" />
 
+        <FrameLayout
+            android:id="@+id/cell_3_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
+        <FrameLayout
+            android:id="@+id/cell_3_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
         <!-- שורה חמישית -->
         <FrameLayout
             android:id="@+id/cell_4_0"
@@ -165,6 +248,19 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1" />
 
+        <FrameLayout
+            android:id="@+id/cell_4_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+
+        <FrameLayout
+            android:id="@+id/cell_4_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
 
     </GridLayout>
 
@@ -172,7 +268,7 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/main_LAYOUT_buttons"
+        android:id="@+id/game_LAYOUT_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -180,7 +276,7 @@
         >
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/main_BTN_left"
+            android:id="@+id/game_BTN_left"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_weight="1"
@@ -194,7 +290,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/main_BTN_right"
+            android:id="@+id/game_BTN_right"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_weight="1"

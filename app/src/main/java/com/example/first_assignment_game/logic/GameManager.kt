@@ -1,7 +1,10 @@
 package com.example.first_assignment_game.logic
 
 
+import android.util.Log
+import com.example.first_assignment_game.R
 import com.example.first_assignment_game.utilities.Constants
+import com.example.sensorrclass.utilities.SingleSoundPlayer
 
 class GameManager(private val lifeCount: Int = 3) {
 
@@ -13,12 +16,23 @@ class GameManager(private val lifeCount: Int = 3) {
 
     var prevLives: Int = lifeCount
 
-    var blastcounter: Int = Constants.GameConstants.BLAST_COUNTER
+    var blastCounter: Int = Constants.GameConstants.BLAST_COUNTER
         private set
+
+    var senzuCounter: Int = 0
+        private set
+
+    var coinCounter: Int = 0
+        private set
+
+    var coinsCollected: Int = 0
+        private set
+
+    var prevCoins: Int = 0
 
     var playerRow: Int = Constants.PlayerConstants.PLAYER_START_ROW
         private set
-    var playerIndex: Int = 1
+    var playerCol: Int = Constants.PlayerConstants.PLAYER_START_COL
         private set
 
     var playerPrevIndex: Int = 0
@@ -30,15 +44,21 @@ class GameManager(private val lifeCount: Int = 3) {
         private set
 
 
-    // 0 = Empty, 1 = Obstacle
+    var distance: Int = 0
+    // 0 = Empty, 1 = obstacle
     val grid: Array<IntArray> = Array(Constants.GameConstants.ROWS) { IntArray(Constants.GameConstants.COLS) }
 
 
     fun startGame() {
         isGameRunning = true
         score = 0
+        isHit = false
+        coinsCollected = 0
         lives = lifeCount
-        playerIndex = 1
+        prevLives = lifeCount
+        distance = 0
+        playerRow = Constants.PlayerConstants.PLAYER_START_ROW
+        playerCol = Constants.PlayerConstants.PLAYER_START_COL
         resetGrid()
     }
 
@@ -53,10 +73,10 @@ class GameManager(private val lifeCount: Int = 3) {
     fun movePlayer(direction: Int): Boolean {
         isHit = false
         // direction: -1 (Left), +1 (Right)
-        val newIndex = playerIndex + direction
+        val newIndex = playerCol + direction
         if (newIndex in 0 until  Constants.GameConstants.COLS) {
-            playerPrevIndex = playerIndex
-            playerIndex = newIndex
+            playerPrevIndex = playerCol
+            playerCol = newIndex
             if (checkCollision()){
                 isHit = true
             }
@@ -74,8 +94,6 @@ class GameManager(private val lifeCount: Int = 3) {
             return false
         }
 
-        score += Constants.GameConstants.SCORE_INCREMENT
-
 
         // 1. Move obstacles down (Shift grid)
         for (i in Constants.GameConstants.ROWS - 1 downTo 1) {
@@ -86,32 +104,64 @@ class GameManager(private val lifeCount: Int = 3) {
         if (checkCollision()){
             isHit = true
         }
+
         // 2. Clear top row
         for (j in 0 until Constants.GameConstants.COLS) {
             grid[0][j] = 0
         }
 
         // 3. Add new obstacle randomly in top row
-        if(blastcounter == Constants.GameConstants.BLAST_COUNTER){
+        if(blastCounter == Constants.GameConstants.BLAST_COUNTER){
             val randomCol = (0 until Constants.GameConstants.COLS).random()
             grid[0][randomCol] = 1
-            blastcounter = 0
-        }else{
-            blastcounter++
+            blastCounter = 0
+        }        else{
+            blastCounter++
         }
 
-
+        // 4. Add new senzu bean randomly in top row
+        if(senzuCounter == Constants.GameConstants.SENZU_COUNTER){
+            val randomCol = (0 until Constants.GameConstants.COLS).random()
+            grid[0][randomCol] = 2
+            senzuCounter = 0
+        }else {
+            senzuCounter++
+        }
+        // 5. Add new coin randomly in top row
+        if(coinCounter == Constants.GameConstants.COIN_COUNTER){
+            val randomCol = (0 until Constants.GameConstants.COLS).random()
+            grid[0][randomCol] = 3
+            coinCounter = 0
+        }else {
+            coinCounter++
+        }
         return true
     }
 
     private fun checkCollision() : Boolean{
-        val playerRow = Constants.GameConstants.ROWS - 1
-        
-        if (grid[playerRow][playerIndex] == 1) {
-
+        var playerPosition = grid[playerRow][playerCol]
+        //case coin
+        if ( playerPosition == Constants.GameConstants.COIN) {
+            score += Constants.GameConstants.COIN_SCORE
+            prevCoins = coinsCollected
+            coinsCollected++
+            playerPosition = Constants.GameConstants.EMPTY
+            return true
+        }
+        //case senzu
+        if (playerPosition == Constants.GameConstants.SENZU) {
+            prevLives = lives
+            playerPosition = Constants.GameConstants.EMPTY
+            if (lives < lifeCount){
+                lives++
+            }
+            return true
+        }
+        //case energy blast
+        if ( playerPosition ==  Constants.GameConstants.BLAST) {
             prevLives = lives
             lives--
-            grid[playerRow][playerIndex] = 0
+            playerPosition =  Constants.GameConstants.EMPTY
 
             if (lives <= 0) {
                 isGameRunning = false
@@ -121,6 +171,17 @@ class GameManager(private val lifeCount: Int = 3) {
         }
         return false
     }
+
+    fun calcScore(){
+        val scoreFromCoins = coinsCollected * Constants.GameConstants.COIN_SCORE
+        val scoreFromDistance = distance * Constants.GameConstants.SCORE_INCREMENT
+        Log.d("scoreFromCoins", scoreFromCoins.toString())
+        Log.d("scoreFromDistance", scoreFromDistance.toString())
+
+        score = scoreFromCoins + scoreFromDistance
+
+    }
 }
+
 
 
