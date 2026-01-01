@@ -59,6 +59,7 @@ class GameActivity : AppCompatActivity() {
 
     private lateinit var ssp: SingleSoundPlayer
 
+    private  var timerDelay : Long = Constants.TimerConstants.EASY_DELAY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +84,7 @@ class GameActivity : AppCompatActivity() {
         startTimer()
         if (tiltMode) tiltDetector.start()
         timerOn = true
+        BackgroundMusicPlayer.getInstance().playMusic()
     }
 
     override fun onPause() {
@@ -90,6 +92,8 @@ class GameActivity : AppCompatActivity() {
         stopTimer()
         if (tiltMode) tiltDetector.stop()
         timerOn = false
+        BackgroundMusicPlayer.getInstance().pauseMusic()
+
     }
 
     private fun initViews() {
@@ -131,6 +135,15 @@ class GameActivity : AppCompatActivity() {
                         if (gameManager.movePlayer(1)) updatePlayerPositionOnBoard()
                     }
                 }
+
+                override fun tiltFront() {
+                    setGameSpeed(Constants.TimerConstants.HARD_DELAY)
+                }
+
+                override fun tiltBack() {
+                    setGameSpeed(Constants.TimerConstants.EASY_DELAY)
+                }
+
             })
         }else {
             game_BTN_Left.setOnClickListener {
@@ -260,39 +273,44 @@ class GameActivity : AppCompatActivity() {
             timerOn = true
             startTime = System.currentTimeMillis()
             timer =Timer()
-            var timerDelay = if(gameDifficulty == "Fast" && tiltMode == false)
-                Constants.TimerConstants.HARD_DELAY
-            else
-                Constants.TimerConstants.EASY_DELAY
-            var tickCounter = 0
-            val ticksPerThreeSeconds = (1000 / timerDelay).toInt()
+
+            //set difficulty on button mode
+            if (gameDifficulty == "Fast" && tiltMode == false)
+               timerDelay = Constants.TimerConstants.HARD_DELAY
+            else if (gameDifficulty == "Slow" && tiltMode == false)
+                timerDelay =   Constants.TimerConstants.EASY_DELAY
 
             timer.schedule(object : TimerTask(){
                 override fun run() {
-                    tickCounter++
                     val gameContinues = gameManager.updateGame()
                     val lostLife = gameManager.prevLives > gameManager.lives
                     val gainLife = gameManager.prevLives < gameManager.lives
                     val gainCoin = gameManager.prevCoins < gameManager.coinsCollected
 
+                    //case lost game
                     if(!gameContinues){
                         stopTimer()
                         gameManager.calcScore()
-                        changeToGameOverActivity("Game Over!\nEnergy Level:",gameManager.score)
+                        changeToGameOverActivity("Game Over!\nScore:",gameManager.score)
                     }
 
+                    //case lost life
                     if (lostLife) ssp.playSound(R.raw.energy_blast)
+
+                    //case gained life
                     if (gainLife) {
                         gameManager.prevLives = gameManager.lives
                         ssp.playSound(R.raw.senzu_bean)
                     }
+
+                    //case gained coin
                     if (gainCoin) {
                         gameManager.prevCoins = gameManager.coinsCollected
                         ssp.playSound(R.raw.coin)
                     }
 
                     runOnUiThread {
-
+                        //toast and vibrate on lost life
                         if (lostLife){
                             gameManager.prevLives = gameManager.lives
                             SignalManager
@@ -304,14 +322,15 @@ class GameActivity : AppCompatActivity() {
                             SignalManager.getInstance().vibrate()
 
                         }
+                        //update player view on death
                         if (gameManager.lives == 0) {
                             playerView.setImageResource(R.drawable.player_dead)
                         }
-                        if (tickCounter >= ticksPerThreeSeconds){
-                            tickCounter = 0
-                            gameManager.distance += 1
-                            updateOdometer()
-                        }
+                        //update odometer and distance every tick
+                        gameManager.distance += 1
+                        updateOdometer()
+
+                        //update all related game views on board
                         updateSenzuBeansPositionOnBoard()
                         updateCoinsPositionOnBoard()
                         updateEnergyBlastsPositionOnBoard()
@@ -400,4 +419,13 @@ class GameActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun setGameSpeed(newDelay: Long) {
+        if (timerDelay == newDelay) return
+        timerDelay = newDelay
+
+        if (timerOn) {
+            stopTimer()
+            startTimer()
+        }
+    }
 }

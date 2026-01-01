@@ -46,8 +46,8 @@ class GameOverActivity : AppCompatActivity() {
             if (granted) {
                 locationDetector?.fetchLastLocation()
             } else {
-                // fallback: save without location
-                saveHighScore(pendingName!!, pendingScore, 0.0, 0.0)
+                // save without location
+                saveHighScore(pendingName!!, pendingScore, 35.5405, -79.7483)
                 gameover_LAYOUT_highscore.visibility = View.GONE
             }
         }
@@ -101,11 +101,10 @@ class GameOverActivity : AppCompatActivity() {
             pendingName = name
             pendingScore = score
 
-            // Create detector
+            // create detector
             locationDetector = LocationDetector(this, object : LocationCallback {
                 override fun onLocation(lat: Double, lon: Double) {
                     saveHighScore(name, score, lat, lon)
-                    Log.d("latlon", "$lat, $lon")
                     gameover_LAYOUT_highscore.visibility = View.GONE
                 }
 
@@ -206,7 +205,6 @@ class GameOverActivity : AppCompatActivity() {
             }
         val updatedTop10 = (existingLeaderBoard.leaderBoard + newHighScore)
             .sortedByDescending { it.score }
-            .take(10)
 
         SharedPreferencesManager.getInstance().putString(
             key,

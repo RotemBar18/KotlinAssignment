@@ -74,13 +74,13 @@ class LeaderBoardFragment : Fragment() {
                 LeaderBoard(mutableListOf())
 
             }
-        Log.d("LeaderBoard From SP", leaderBoard.toString())
         val sortedLeaderBoard = leaderBoard.leaderBoard.sortedByDescending { it.score }
         loadHighScoresUI(sortedLeaderBoard)
     }
     private fun loadHighScoresUI(leaderBoard: List<HighScore>) {
-        val topScores = leaderBoard.take(10)
-        if (topScores.isEmpty()) {
+        highscore_LAYOUT_highscore_list.removeAllViews()
+        if (leaderBoard.isEmpty()) {
+            // case there are no high scores
             val row = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.HORIZONTAL
                 setPadding(12, 12, 12, 12)
@@ -94,45 +94,61 @@ class LeaderBoardFragment : Fragment() {
             highscore_LAYOUT_highscore_list.addView(row)
             return
         }
-        for (highScore in topScores) {
+
+        // case there are high scores
+        for (highScore in leaderBoard.take(10)) {
+            //create a linear layout for each row
             val row = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.HORIZONTAL
-                setPadding(12, 2, 12, 2)
-
+                setPadding(4, 2, 4, 2)
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                gravity = Gravity.CENTER_VERTICAL
+
+
+
+                //create view for each highscore column (name, score, lat, lon)
                 val nameLBL = MaterialTextView(requireContext()).apply {
-                    maxLines = 2
+                    maxLines = 1
                     text = highScore.name
                     textSize = resources.getDimension(R.dimen.highscore_text_size)
-                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 4f)
+                    gravity = Gravity.START
+                    layoutParams = LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        4f)
                 }
                 val scoreLBL = MaterialTextView(requireContext()).apply {
                     text = highScore.score.toString()
-                    gravity = Gravity.CENTER
+                    gravity = Gravity.END
                     textSize = resources.getDimension(R.dimen.highscore_text_size)
-                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3f)
+                    layoutParams = LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        2f)
                 }
                 val latLBL = MaterialTextView(requireContext()).apply {
                     text = String.format("%.2f", highScore.lat)
                     textSize = resources.getDimension(R.dimen.highscore_text_size)
-                    gravity = Gravity.CENTER
-                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2f)
+                    gravity = Gravity.END
+                    layoutParams = LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        2f)
                 }
                 val lonLBL = MaterialTextView(requireContext()).apply {
                     text = String.format("%.2f", highScore.lon)
                     textSize = resources.getDimension(R.dimen.highscore_text_size)
-                    gravity = Gravity.CENTER
-                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2f)
+                    gravity = Gravity.END
+                    layoutParams = LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        2f)
                 }
                 val pinImg = MaterialTextView(requireContext()).apply {
                     text = "📍"
                     textSize = resources.getDimension(R.dimen.highscore_text_size)
-                    gravity = Gravity.RIGHT
-                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                    gravity = Gravity.END
+                    layoutParams = LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1f)
                 }
                 addView(nameLBL)
                 addView(scoreLBL)

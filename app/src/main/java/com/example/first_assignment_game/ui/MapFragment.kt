@@ -45,7 +45,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-
         map.clear()
         map.addMarker(MarkerOptions().position(placeholder).title("Placeholder Location"))
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(placeholder, 14f))

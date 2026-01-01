@@ -2,9 +2,7 @@ package com.example.first_assignment_game.logic
 
 
 import android.util.Log
-import com.example.first_assignment_game.R
 import com.example.first_assignment_game.utilities.Constants
-import com.example.sensorrclass.utilities.SingleSoundPlayer
 
 class GameManager(private val lifeCount: Int = 3) {
 
@@ -45,11 +43,12 @@ class GameManager(private val lifeCount: Int = 3) {
 
 
     var distance: Int = 0
-    // 0 = Empty, 1 = obstacle
+
     val grid: Array<IntArray> = Array(Constants.GameConstants.ROWS) { IntArray(Constants.GameConstants.COLS) }
 
 
     fun startGame() {
+        //reset all parameters
         isGameRunning = true
         score = 0
         isHit = false
@@ -175,11 +174,7 @@ class GameManager(private val lifeCount: Int = 3) {
     fun calcScore(){
         val scoreFromCoins = coinsCollected * Constants.GameConstants.COIN_SCORE
         val scoreFromDistance = distance * Constants.GameConstants.SCORE_INCREMENT
-        Log.d("scoreFromCoins", scoreFromCoins.toString())
-        Log.d("scoreFromDistance", scoreFromDistance.toString())
-
         score = scoreFromCoins + scoreFromDistance
-
     }
 }
 

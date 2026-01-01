@@ -1,6 +1,5 @@
 package com.example.first_assignment_game.model
 
-import com.example.first_assignment_game.model.HighScore
 import com.example.first_assignment_game.R
 
 class DataManager  {
