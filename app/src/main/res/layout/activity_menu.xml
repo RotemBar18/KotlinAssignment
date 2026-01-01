@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_LAYOUT_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/menu_background"
+    >
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/menu_IMG_header"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/menu"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/default_margin"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_weight="2"
+        android:padding="@dimen/default_padding"
+        >
+
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/menu_BTN_buttonMode"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:textSize="@dimen/default_sml_textsize"
+                    android:text="Start Button Mode"
+                    app:backgroundTint="@null"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_gradient"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/menu_TGL_difficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:checked="true"
+                    android:paddingVertical="@dimen/default_padding"
+                    android:text="Slow"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/default_sml_textsize"
+                    app:thumbTint="@color/white"
+                    app:trackTint="@color/orange"
+                    android:gravity="right"
+                    />
+            </LinearLayout>
+
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:id="@+id/menu_BTN_tiltMode"
+                android:textSize="@dimen/default_sml_textsize"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:backgroundTint="@null"
+                android:background="@drawable/btn_gradient"
+                android:text="Start Sensor Mode"
+                android:layout_gravity="left"
+
+                />
+
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_topTen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="100dp"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:textSize="@dimen/text_size"
+        android:text="Top Ten"
+        app:backgroundTint="@null"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:background="@drawable/btn_gradient"
+        />
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
