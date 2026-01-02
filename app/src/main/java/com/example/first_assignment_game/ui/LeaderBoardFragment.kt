@@ -60,7 +60,6 @@ class LeaderBoardFragment : Fragment() {
                     Constants.SP_Keys.LEADERBOARD_KEY,
                     ""
                 )
-        Log.d("LeaderBoard From SP", leaderBoardJson)
 
         val leaderBoard : LeaderBoard = if (leaderBoardJson.isNotEmpty())
             try {
