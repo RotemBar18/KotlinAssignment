@@ -18,7 +18,7 @@ import com.google.android.material.textview.MaterialTextView
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
-    private val placeholder = LatLng(32.0853, 34.7818)
+    private val placeholder = LatLng(31.7768, 35.2055)
 
 
 
@@ -47,7 +47,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         googleMap = map
         map.clear()
         map.addMarker(MarkerOptions().position(placeholder).title("Placeholder Location"))
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(placeholder, 14f))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(placeholder, 16f))
     }
 
     fun zoom(lat: Double, lon: Double) {
